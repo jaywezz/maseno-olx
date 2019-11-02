@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+ {% include 'Maseno_olx-template/header.html' %}
+    <p><b>Your information</b></p>
+<p>Profile Photo</p>
+{% if user.user_avatar is None %}
+ <p  style="color:red">No profile photo for this account</p>
+
+{% else %}
+<img style="width:100px; height:100px" src="{{ user.user_avatar.url  }}">
+
+{% endif %}
+
+<p>Your Username: {{ user }}</p>
+
+{% if user.email is None %}
+ <p  style="color:red">No email set</p>
+{% else %}
+<p>Your Email address: <b>{{ user.email }}</b></p>
+{% endif %}
+{% if user.phone_number is None %}
+ <p  style="color:red">No phone number provided</p>
+{% else %}
+<p>Your Phone Number address: <b>0{{ user.phone_number }}</b></p>
+{% endif %}
+
+{% if user.location is None %}
+ <p style="color:red">You have not set your location</psty>
+{% else %}
+<p>Your Location: <b>{{ user.location }}</b></p>
+{% endif %}
+
+<form action="." method="post" enctype="multipart/form-data">
+{{ profile_form.as_p }}
+{% csrf_token %}
+<p><input type="submit" value="Edit Profile"></p>
+</form>
+
+
+
+<a href="{% url 'item_view:welcome_page' %}" class="btn btn-success">Home</a>
+

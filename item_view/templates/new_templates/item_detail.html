@@ -1,0 +1,9 @@
+{% if item.item_owner == request.user %}
+  
+   {% include 'new_templates/owner_item_detail.html' %}
+
+{% else %}
+
+  {<div>You are not the owner</div>}
+
+{% endif %}

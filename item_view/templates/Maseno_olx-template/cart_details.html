@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  {{ cart }}
+  <h1>Your shopping cart</h1>
+    <table class="cart">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+            <th>Unit price</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+        {% with product=item.item %}
+    <tr>
+
+        <td>{{ product.item_name }}</td>
+        <td>{{ product.quantity }}</td>
+        <td><a href="{% url 'item_view:cart_remove' item.id %}">Remove</a></td>
+        <td class="num">${{ product.price }}</td>
+        <td class="num">${{ product.total_price }}</td>
+    </tr>
+{% endwith %}
+{% endfor %}
+    <tr class="total">
+    <td>Total</td>
+    <td colspan="4"></td>
+    <td class="num">${{ cart_items.get_total_price }}</td>
+</tr>
+</tbody>
+</table>
+<p class="text-right">
+<a href="{% url 'item_view:welcome_page' %}" class="button
+light">Continue shopping</a>
+<a href="#" class="button">Checkout</a>
+</p>
+</body>
+</html>

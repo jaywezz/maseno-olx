@@ -1,0 +1,41 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{ item.item_owner }}
+   {% include 'Maseno_olx-template/header.html' %}
+ {% if user == item.item_owner %}
+   <form method="POST" action="" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{ form|crispy}}
+        <button type="submit"> Upload </button>
+    </form>
+
+   {% else %}
+
+    <p>Item Description: {{ item.item_description }}</p>
+   <p>Item Price {{ item.item_price }}</p>
+   <p>Item Category: {{ item.item_category }}</p>
+   <p>Item Owner: {{ item.item_owner }}</p>
+   <img style="width:200px;height:200px;" src="{{ item.item_image.url }}">
+   <form action="{% url 'item_view:cart_add' item.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+   </form>
+
+<p><b>Owner Information</b></p>
+
+    <p>Owned By: {{ owner.username }}</p>
+    <p>Contact: {{ owner.phone_number }}</p>
+   <p>Or Email: {{ owner.email }}</p>
+   <p>Location: {{ owner.location }}</p>
+
+ {% endif %}
+
+</body>
+</html>

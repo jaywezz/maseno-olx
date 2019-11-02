@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  
+  {% include 'Maseno_olx-template/header.html' %}
+
+  {% for item in recently_uploaded_items %}
+
+  <a href="{{ item.get_absolute_url }}">
+    <p>{{ item.item_name }} At only {{ item.item_price}}</p>
+    <div  class="col-lg-4 col-md-6" >
+      <figure style="width: 130px !important;" >
+        <img src="{{ item.item_image.url  }}" alt="{{ item.item_descrition }}" class="img-fluid">
+      </figure>
+    </div>
+  </a>
+
+  {% endfor %}
+
+<a href="{% url 'authentication:profile' %}" class="btn btn-success">View Profile</a>
+</body>
+</html>
+
+
+
+  
